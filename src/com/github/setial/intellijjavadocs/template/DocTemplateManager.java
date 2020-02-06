@@ -1,6 +1,7 @@
 package com.github.setial.intellijjavadocs.template;
 
 import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.components.Service;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiMethod;

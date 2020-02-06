@@ -8,11 +8,10 @@ import com.github.setial.intellijjavadocs.model.settings.Mode;
 import com.github.setial.intellijjavadocs.model.settings.Visibility;
 import com.github.setial.intellijjavadocs.template.DocTemplateManager;
 import com.github.setial.intellijjavadocs.ui.settings.ConfigPanel;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
@@ -22,7 +21,7 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,10 +33,7 @@ import java.util.Set;
 @State(
         name = JavaDocConfiguration.COMPONENT_NAME,
         storages = {
-                @Storage(
-                        id = "other",
-                        file = StoragePathMacros.APP_CONFIG + "/intellij-javadocs.xml"
-                )
+                @Storage("intellij-javadocs.xml")
         }
 )
 public class JavaDocConfigurationImpl implements JavaDocConfiguration, Configurable,
@@ -54,7 +50,7 @@ public class JavaDocConfigurationImpl implements JavaDocConfiguration, Configura
      * Instantiates a new Java doc configuration object.
      */
     public JavaDocConfigurationImpl() {
-        templateManager = ServiceManager.getService(DocTemplateManager.class);
+        templateManager = ApplicationManager.getApplication().getComponent(DocTemplateManager.class);
     }
 
     @Override
